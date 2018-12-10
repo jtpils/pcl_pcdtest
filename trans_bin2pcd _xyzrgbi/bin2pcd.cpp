@@ -60,7 +60,8 @@ int main(int argc, char **argv){
  
 	pcl::PointCloud<PointXYZRGB>::Ptr points (new pcl::PointCloud<PointXYZRGB>);
  
-	int r=20, g=30, b=40;
+	float r=255, g=0, b=0;
+	int i;
 	float c;
 	for (i=0; input.good() && !input.eof(); i++) {
 		PointXYZRGB point;
@@ -68,9 +69,11 @@ int main(int argc, char **argv){
 		input.read((char *) &point.y, sizeof(float));
 		input.read((char *) &point.z, sizeof(float));
 
-		input.read((char *) &point.r, sizeof(float));
-		input.read((char *) &point.g, sizeof(float));
-		input.read((char *) &point.b, sizeof(float));
+		input.read((char *) &r, sizeof(float));
+		input.read((char *) &g, sizeof(float));
+		input.read((char *) &b, sizeof(float));
+		uint32_t rgb = ((uint32_t)r << 16 | (uint32_t)g << 8 | (uint32_t)b);
+		point.rgb = *reinterpret_cast<float*>(&rgb);
 
 		// input.read((char *) &point.a, sizeof(float));
 		input.read((char *) &c, sizeof(float));

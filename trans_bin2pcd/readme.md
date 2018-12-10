@@ -1,4 +1,6 @@
 # 这是一个将bin文件转换成pcd文件的demo
+修改了文件格式,可以将其转换成彩色点云图.
+用pcl_viewer可以查看点云图.
 
 i=1;for x in your/input/data/*.bin; do build/bin2pcd --infile $x --outfile PCD_data/$i.pcd; let i=i+1; done
  
